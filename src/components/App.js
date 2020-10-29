@@ -1,12 +1,10 @@
 import React from 'react'
-
 import Filters from './Filters'
 import PetBrowser from './PetBrowser'
 
 class App extends React.Component {
   constructor() {
     super()
-
     this.state = {
       pets: [],
       adoptedPets:"",
@@ -17,13 +15,13 @@ class App extends React.Component {
   }
 
 onChangeType=(animalType)=>{
+ 
   this.setState({
-    
+
     filters:{
       type: animalType
-  }
+    }
   })
-
 }
 
 onFindPetsClick=(animalType)=>{
@@ -50,11 +48,9 @@ onFindPetsClick=(animalType)=>{
 
 
 onAdoptPet=(id)=>{
-  
-  let pet =this.state.pets.find(pet=>pet.id == id)
-  pet.isAdopted=true
+   let pet =this.state.pets.find(pet=>pet.id == id)
+   pet.isAdopted = true
    this.setState({ adoptedPets: pet})
-  
 }
 
 
