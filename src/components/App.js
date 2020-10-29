@@ -7,7 +7,6 @@ class App extends React.Component {
     super()
     this.state = {
       pets: [],
-      adoptedPets:"",
       filters: {
         type: 'all'
       }
@@ -17,40 +16,34 @@ class App extends React.Component {
 onChangeType=(animalType)=>{
  
   this.setState({
-
     filters:{
       type: animalType
     }
   })
+
 }
 
 onFindPetsClick=(animalType)=>{
-     URL='/api/pets'
-       if (this.state.filters.type == 'all'){
 
-          fetch(URL)
-          .then(res => res.json())
-          .then(pets=>{
-             this.setState({
-               pets 
-            }
-          )})
-       }else{           
-          fetch(URL+`?type=${this.state.filters.type}`)
-          .then(res => res.json())
-          .then(pets=>{
-             this.setState({
-               pets 
-            })
-          })
-     }
+      URL='/api/pets'
+       if (this.state.filters.type != 'all'){
+         URL= URL+`?type=${this.state.filters.type}`
+       }          
+      fetch(URL)
+      .then(res => res.json())
+      .then(pets=>{
+          this.setState({
+            pets 
+        })
+      })
 }
 
 
 onAdoptPet=(id)=>{
-   let pet =this.state.pets.find(pet=>pet.id == id)
-   pet.isAdopted = true
-   this.setState({ adoptedPets: pet})
+   this.state.pets.find(pet=>pet.id == id).isAdopted =true
+   this.setState({
+     pets: this.state.pets
+   })
 }
 
 
@@ -71,7 +64,6 @@ onAdoptPet=(id)=>{
             <div className="twelve wide column">
               <PetBrowser  pets={this.state.pets} 
                            onAdoptPet={this.onAdoptPet} 
-                           adoptedPets={this.state.adoptedPets}
               />
             </div>
           </div>
