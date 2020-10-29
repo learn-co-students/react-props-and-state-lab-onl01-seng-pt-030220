@@ -12,16 +12,8 @@ class Pet extends React.Component {
  }
 
   render() {
-   let gender
-   if (this.props.pet.gender == "male")
-    {
-       gender= '♂'
-      }
-    else
-    {
-       gender = '♀'
-    
-    }
+   
+    let gender = this.props.pet.gender == "male" ? '♂':'♀'
 
     return (
       <div className="card" >
